@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crud de Clientes com Express</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8" />
+  </head>
+<script>
+  if(location.href.indexOf('delete=true')!= -1){
+    alert('Cliente excluido com sucesso!');
+  }else if(location.href.indexOf('edit=true')!=-1){
+    alert('Cliente editado com sucesso');
+  }else if(location.href.indexOf('mew=true')!=-1){
+    alert('Cliente cadastrado com Sucesso!');
+  }
+</script>
+
+  <body>
+    <h1>Listagem de Clientes</h1>
+    <p>Clientes já cadastrados no Sistema</p>
+    <table style="width:50%">
+   <thead>
+     <tr style="background-color:#CCC">
+       
+       <td width:"50%">Nome</td>
+       <td width:"50%">Idade</td>
+       <td width:"50%">UF</td>
+       <td>Ações</td>
+      </tr>
+    
+   </thead>
+      <tbody>
+        <% if(!docs || docs.length == 0) { %>
+        <tr>
+        <td colspan = "4">Nenhum cliente cadastrado</td>
+        </tr>        
+        <% } else {
+          docs.forEach(function(customer){ %>
+              <tr>
+                <td width:"50%"><%=customer.nome %></td>
+                <td width:"15%"><%=customer.idade %></td>
+                <td width:"15%"><%=customer.uf %></td>
+                <td>
+                  <a href="/edit/<%=customer._id %>">Editar</a>
+                  <a href="/delete/<%=customer._id %>" onclick="return confirm('Tem Certeza?');">Excluir</a>
+                </td>
+              </tr>
+            <%
+            })
+          }%>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan = "4">
+            <a href="/new">Cadastrar Novo</a>
+          </td>
+        </tr>
+      </tfoot>
+
+
+    </table>
+
+  </body>
+</html>
